@@ -3,6 +3,8 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from .booking_filtration import BookingFiltration
+from booking.booking_report import BookingReport
+from prettytable import PrettyTable
 
 
 class Booking(webdriver.Chrome):
@@ -69,3 +71,10 @@ class Booking(webdriver.Chrome):
 		filtration.apply_star_rating(5)
 
 		filtration.sort_price_lowest_first()
+
+	def report_results(self):
+		hotel_boxes = self.find_element(By.ID, "hotellist_inner").find_elements(By.CLASS_NAME, "sr_property_block")
+		report = BookingReport(hotel_boxes)
+		table = PrettyTable(field_names=["Hotel name", "Hotel Price", "Hotel Score"])
+		table.add_rows(report.pull_deal_box_attributes())
+		print(table)
