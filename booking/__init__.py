@@ -1,1 +1,9 @@
-print("This file will be initialized first")
+print(
+	"""
+	|===================================|
+	|	WELCOME TO THE BOOKING.COM BOT	|
+	|									|
+	|	By--- Bless Ziamah				|
+	|===================================|
+	"""
+)
